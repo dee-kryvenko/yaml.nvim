@@ -35,7 +35,7 @@ local function get_value_node(node)
 				return node
 			end
 		end
-		node = node:parent()
+		return node:parent()
 	end
 end
 
