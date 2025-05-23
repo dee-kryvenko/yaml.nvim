@@ -35,7 +35,7 @@ local function get_value_node(node)
 				return node
 			end
 		end
-		return node:parent()
+		node = node:parent()
 	end
 end
 
@@ -109,7 +109,10 @@ M.parse = function(node)
 	local cleaned_value = clean_up_block_value(value)
 	local human = string.format("%s = %s", key, cleaned_value)
 	local start_line, start_col = node:start()
-	local end_line, _ = value_node:end_()
+	local end_line = start_line
+	if value_node then
+		end_line, _ = value_node:end_()
+	end
 
 	return {
 		key = key,
